@@ -24,6 +24,10 @@ dependencies {
     annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
+    annotationProcessor "io.micronaut.configuration:micronaut-openapi"
+    annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0'
+    compileOnly 'jakarta.persistence:jakarta.persistence-api:2.2.2'
+    implementation "io.micronaut.data:micronaut-data-jdbc"
     implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
     implementation "io.micronaut:micronaut-http-client"
     implementation "io.micronaut.configuration:micronaut-jdbc-hikari"
