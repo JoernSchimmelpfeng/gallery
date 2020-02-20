@@ -1,5 +1,5 @@
 profile: service
-defaultPackage: gallery
+defaultPackage: de.dhbw.gallery
 ---
 testFramework: spock
 sourceLanguage: java

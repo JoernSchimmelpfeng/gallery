@@ -1,4 +1,4 @@
-package gallery;
+package de.dhbw.gallery;
 
 import io.micronaut.runtime.Micronaut;
 

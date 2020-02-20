@@ -1,1 +1,1 @@
-# gallery
+# de.dhbw.gallery
