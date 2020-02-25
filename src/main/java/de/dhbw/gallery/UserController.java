@@ -14,6 +14,9 @@ import java.net.URISyntaxException;
 
 @Controller("/user")
 @Singleton
+/**
+ * Controller for the user REST API
+ */
 public class UserController {
     private final UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -24,6 +27,7 @@ public class UserController {
 
     @Get("/{id}")
     public User show(Long id) {
+        log.debug("Get user with id {}", id);
         return userRepository
                 .findById(id)
                 .orElse(null);
@@ -31,6 +35,7 @@ public class UserController {
 
     @Put("/{id}")
     public HttpResponse update(@Body @Valid User user) {
+        log.debug("Updating user {}", user);
         userRepository.update(user);
 
         return HttpResponse
@@ -40,12 +45,13 @@ public class UserController {
 
     @Get()
     public Iterable<User> list() {
+        log.debug("List all users");
         return userRepository.findAll();
     }
 
     @Post("/")
     public HttpResponse<User> save(@Body @Valid User user) {
-        log.debug("User: {}", user);
+        log.debug("Save user {}", user);
         User newUser = userRepository.save(user);
 
         return HttpResponse
@@ -63,6 +69,7 @@ public class UserController {
 
     @Delete("/{id}")
     public HttpResponse delete(Long id) {
+        log.debug("Deleting user {}", id);
         userRepository.deleteById(id);
         return HttpResponse.noContent();
     }
