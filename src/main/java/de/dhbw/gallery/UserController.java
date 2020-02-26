@@ -12,11 +12,11 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Controller("/user")
-@Singleton
 /**
  * Controller for the user REST API
  */
+@Controller("/user")
+@Singleton
 public class UserController {
     private final UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -74,4 +74,10 @@ public class UserController {
         return HttpResponse.noContent();
     }
 
+    @Delete("/")
+    public HttpResponse deleteAll() {
+        log.debug("Deleting all user");
+        userRepository.deleteAll();
+        return HttpResponse.noContent();
+    }
 }
