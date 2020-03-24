@@ -18,17 +18,17 @@ import java.net.URISyntaxException;
 @Controller("/user")
 @Singleton
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserRepository repository;
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.repository = userRepository;
     }
 
     @Get("/{id}")
     public User show(Long id) {
         log.debug("Get user with id {}", id);
-        return userRepository
+        return repository
                 .findById(id)
                 .orElse(null);
     }
@@ -36,7 +36,7 @@ public class UserController {
     @Put("/{id}")
     public HttpResponse update(@Body @Valid User user) {
         log.debug("Updating user {}", user);
-        userRepository.update(user);
+        repository.update(user);
 
         return HttpResponse
                 .noContent()
@@ -46,13 +46,13 @@ public class UserController {
     @Get()
     public Iterable<User> list() {
         log.debug("List all users");
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
     @Post("/")
     public HttpResponse<User> save(@Body @Valid User user) {
         log.debug("Save user {}", user);
-        User newUser = userRepository.save(user);
+        User newUser = repository.save(user);
 
         return HttpResponse
                 .created(newUser)
@@ -70,14 +70,14 @@ public class UserController {
     @Delete("/{id}")
     public HttpResponse delete(Long id) {
         log.debug("Deleting user {}", id);
-        userRepository.deleteById(id);
+        repository.deleteById(id);
         return HttpResponse.noContent();
     }
 
     @Delete("/")
     public HttpResponse deleteAll() {
         log.debug("Deleting all user");
-        userRepository.deleteAll();
+        repository.deleteAll();
         return HttpResponse.noContent();
     }
 }

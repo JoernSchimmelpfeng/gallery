@@ -1,17 +1,14 @@
 package de.dhbw.gallery
 
 import de.dhbw.gallery.domain.User
-import io.micronaut.data.jdbc.runtime.JdbcOperations
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.RxHttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.annotation.MicronautTest
-import spock.lang.AutoCleanup
 import spock.lang.Specification
 
 import javax.inject.Inject
-import javax.persistence.EntityManager
-import javax.sql.DataSource
+
 
 @MicronautTest
 /**
