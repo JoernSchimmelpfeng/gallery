@@ -28,6 +28,7 @@ dependencies {
     annotationProcessor "io.micronaut.configuration:micronaut-openapi"
     annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0'
     compileOnly "org.graalvm.nativeimage:svm"
+    implementation("io.swagger.core.v3:swagger-annotations")
     implementation 'jakarta.persistence:jakarta.persistence-api:2.2.2'
     implementation "io.micronaut.data:micronaut-data-jdbc"
     implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
@@ -57,7 +58,12 @@ dependencies {
 test.classpath += configurations.developmentOnly
 
 mainClassName = "de.dhbw.gallery.Application"
-// use JUnit 5 platform
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.forkOptions.jvmArgs << '-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop'
+}
+
 test {
     useJUnitPlatform()
 }
