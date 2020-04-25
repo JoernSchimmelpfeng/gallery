@@ -1,4 +1,13 @@
-FROM adoptopenjdk/openjdk11-openj9:jdk-11.0.1.13-alpine-slim
-COPY build/libs/de.dhbw.gallery-*-all.jar de.dhbw.gallery.jar
+FROM oracle/graalvm-ce:19.3.1-java11 as graalvm
+RUN gu install native-image
+
+COPY . /home/app/gallery
+WORKDIR /home/app/gallery
+
+RUN native-image --no-server --report-unsupported-elements-at-runtime --initialize-at-build-time=org.h2.Driver --static -cp build/libs/de.dhbw.gallery-*-all.jar
+
+FROM scratch
 EXPOSE 8080
-CMD java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar de.dhbw.gallery.jar
+COPY --from=graalvm /home/app/gallery/gallery /app/gallery
+ENTRYPOINT ["/app/gallery", "-Djava.library.path=/app"]
+

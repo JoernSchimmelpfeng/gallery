@@ -1,15 +1,17 @@
 ---
 micronaut:
   application:
-    name: de.dhbw.gallery
+    name: gallery
 
+  server:
+    port: 8087
 ---
 datasources.default: {}
 
 ---
 datasources:
   default:
-    url: jdbc:h2:~/gallerydb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    url: jdbc:h2:mem:gallerydb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
     driverClassName: org.h2.Driver
     username: sa
     password: ''

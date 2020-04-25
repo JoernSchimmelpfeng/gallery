@@ -22,10 +22,12 @@ configurations {
 
 dependencies {
     annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+    annotationProcessor "io.micronaut:micronaut-graal"
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
     annotationProcessor "io.micronaut.configuration:micronaut-openapi"
     annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0'
+    compileOnly "org.graalvm.nativeimage:svm"
     implementation 'jakarta.persistence:jakarta.persistence-api:2.2.2'
     implementation "io.micronaut.data:micronaut-data-jdbc"
     implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
