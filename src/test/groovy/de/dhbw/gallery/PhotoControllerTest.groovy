@@ -1,6 +1,7 @@
 package de.dhbw.gallery
 
-
+import de.dhbw.gallery.domain.Photo
+import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.RxHttpClient
 import io.micronaut.http.client.annotation.Client
@@ -48,9 +49,12 @@ class PhotoControllerTest extends Specification {
 
         when:
         HttpRequest<String> createRequest = HttpRequest.GET(photo_uri);
-        String result = client.toBlocking().retrieve(createRequest);
+        def resultResonse = client.retrieve(createRequest, Argument.of(List.class, Photo.class));
+        def result = resultResonse.blockingFirst()
+
         then:
-        result == "[{\"id\":3,\"name\":\"somename_1\",\"title\":\"sometitle\",\"owner\":{\"id\":17}},{\"id\":4,\"name\":\"somename_2\",\"title\":\"sometitle\",\"owner\":{\"id\":17}},{\"id\":5,\"name\":\"somename_3\",\"title\":\"sometitle\",\"owner\":{\"id\":17}}]"
+        result.size() == 3
+        result.stream().map({it.name}).collect() == ["somename_1", "somename_2", "somename_3"]
 
         cleanup:
         def request = HttpRequest.DELETE(photo_uri)
