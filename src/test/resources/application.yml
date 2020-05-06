@@ -1,4 +1,5 @@
----
+
+
 micronaut:
   application:
     name: de.dhbw.gallery
