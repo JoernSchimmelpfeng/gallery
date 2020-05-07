@@ -16,6 +16,9 @@ micronaut:
       swagger-ui:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
+      content:
+        paths: classpath:static
+        mapping: /content/**
 
   server:
     port: 8280
