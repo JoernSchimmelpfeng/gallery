@@ -5,7 +5,10 @@ import io.micronaut.runtime.Micronaut;
 /**
  * Main Application starting point
  */
-@io.micronaut.core.annotation.TypeHint(typeNames = {"org.h2.Driver", "org.h2.mvstore.db.MVTableEngine"}) // needed for GraalVM
+@io.micronaut.core.annotation.TypeHint(typeNames = { // needed for GraalVM
+        "org.h2.Driver",
+        "org.h2.mvstore.db.MVTableEngine"}
+)
 @io.swagger.v3.oas.annotations.OpenAPIDefinition(
         info = @io.swagger.v3.oas.annotations.info.Info(
                 title = "GalleryProject",
