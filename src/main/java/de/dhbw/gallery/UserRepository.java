@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 abstract public class UserRepository implements CrudRepository<User, Long> {
 
     @Inject
-    private JdbcOperations jdbcOperations;
+    protected JdbcOperations jdbcOperations;
 
     @Override
     @Transactional
