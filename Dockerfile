@@ -4,9 +4,9 @@ RUN gu install native-image
 COPY . /home/app/gallery
 WORKDIR /home/app/gallery
 
-RUN native-image --no-server --report-unsupported-elements-at-runtime --initialize-at-build-time=org.h2.Driver --static -cp build/libs/de.dhbw.gallery-*-all.jar
+RUN native-image --no-server --report-unsupported-elements-at-runtime --initialize-at-build-time=org.h2.Driver --static -cp build/libs/gallery-*-all.jar
 
-FROM scratch
+FROM ubuntu
 EXPOSE 8280
 MAINTAINER Jörn Schimmelpfeng
 COPY --from=graalvm /home/app/gallery/gallery /app/gallery

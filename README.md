@@ -13,6 +13,16 @@ On Windows you need to switch Jansi Logging to false:
 Configuration right now assumes that the H2 database is running standalone since H2 does 
 not work with GraalVM.
 
+```
 ./gradlew assemble
 ./docker-build.sh
 ./docker run -p 8280:8280 --name gallery gallery
+```
+
+Try it out:
+
+```
+curl -X POST "http://localhost:8280/user" -H "accept: application/json" -H "Content-Type: application/json" -d '{"name":"NewUser"}'
+
+curl -X GET "http://localhost:8280/user" -H "accept: application/json"
+```
